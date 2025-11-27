@@ -37,7 +37,7 @@ class TestCalculator(unittest.TestCase):
         calc = Calculator(-10, -5, "+")
         self.assertEqual(calc.calculate(), -15)
 
-    #float inputs -> TODO: change so that this is allowed normally, floats and negative numbers should be ok
+    #float inputs
     def test_float_inputs(self):
         calc = Calculator(2.5, 0.5, "*")
         self.assertAlmostEqual(calc.calculate(), 1.25)
@@ -47,7 +47,7 @@ class TestCalculator(unittest.TestCase):
         calc = Calculator(10**10, 10**10, "+")
         self.assertEqual(calc.calculate(), 2 * 10**10)
 
-    #mixed types -> TODO: also should be okay
+    #mixed types also should be okay
     def test_mixed_types(self):
         calc = Calculator(10, 2.5, "/")
         self.assertEqual(calc.calculate(), 4)
@@ -101,6 +101,7 @@ class TestCalculator(unittest.TestCase):
         calc = Calculator(-10, -2, "/")
         self.assertEqual(calc.calculate(), 5)
 
+    #should fail - no operation "x"
     def test_lowercase_operation(self):
         calc = Calculator(10, 5, "x")
         with self.assertRaises(ValueError):
@@ -129,6 +130,7 @@ class TestCalculator(unittest.TestCase):
         calc = Calculator(1, 1e-308, "/")
         self.assertTrue(calc.calculate() > 1e307)
 
+    #nan test
     def test_nan_input(self):
         import math
         calc = Calculator(math.nan, 1, "+")
